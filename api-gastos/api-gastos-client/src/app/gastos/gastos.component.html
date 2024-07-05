@@ -1,0 +1,204 @@
+<div class="gastos-container">
+
+  <!-- Cards -->
+  <div class="row">
+    <div class="col-2">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Novo</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Inserir nova despesa</h6>
+                <p class="card-text">Cria um novo registro de despesa categorizado por tags customizadas</p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNovaDespesa" (click)="resetarGasto()"> 
+                  Novo
+                </button>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Relatório</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Extrair relatório por período</h6>
+                <p class="card-text">Gera um relatório com a média diária de gastos no período indicado</p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRelatorio">
+                  Relatório
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <br>
+
+  <!-- Tabela de gastos -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Data</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Tags</th>
+        <th scope="col">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let gasto of listaGastos.content">
+        <td>{{gasto.nomePessoa}}</td>
+        <td>{{gasto.descricao}}</td>
+        <td>{{gasto.data | date:"dd/MM/yyyy"}}</td>
+        <td>{{gasto.valor}}</td>
+        <td>
+            <span *ngFor="let tag of gasto.tags" class="badge bg-secondary lista-margin">{{tag.nomeTag}}</span>
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary btn-sm lista-margin" (click)="selecionarGasto(gasto)" data-bs-toggle="modal" data-bs-target="#modalEditarDespesa">Editar</button>
+            <button type="button" class="btn btn-danger btn-sm lista-margin" (click)="selecionarGasto(gasto)" data-bs-toggle="modal" data-bs-target="#modalExcluirDespesa">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="desabilitarBotaoAnterior ? 'disabled' : ''"><button class="page-link" (click)="paginaAnterior()"><span aria-hidden="true">&laquo;</span></button></li>
+      <li class="page-item" [ngClass]="paginaAtual + 1 === item ? 'active' : ''" *ngFor="let item of paginacao"><button class="page-link" (click)="listarGastos(item - 1)">{{item}}</button></li>
+      <li class="page-item" [ngClass]="desabilitarBotaoProximo ? 'disabled' : ''"><button class="page-link" (click)="proximaPagina()"><span aria-hidden="true">&raquo;</span></button></li>
+    </ul>
+  </nav>
+
+  <!-- Modal de nova despesa -->
+  <div class="modal fade" id="modalNovaDespesa" tabindex="-1" aria-labelledby="modalDespesaLabel" aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form #gastoForm="ngForm" class="was-validated">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalDespesaLabel">Nova despesa</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="nomeInput" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="nomeInput"  name="nomeInput" [(ngModel)]="gastoSelecionado.nomePessoa" required>
+              <div class="invalid-feedback">Campo obrigatório não preenchido</div>
+            </div>
+            <div class="mb-3">
+              <label for="descricaoInput" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="descricaoInput" name="descricaoInput" [(ngModel)]="gastoSelecionado.descricao" required>
+              <div class="invalid-feedback">Campo obrigatório não preenchido</div>
+            </div>
+            <div class="mb-3">
+              <label for="dataInput" class="form-label">Data</label>
+              <input class="form-control" id="dataInput" type="date" name="dataInput" [(ngModel)]="gastoSelecionado.data" required/>
+              <div class="invalid-feedback">Campo obrigatório não preenchido</div>
+            </div>
+            <div class="mb-3">
+              <label for="valorInput" class="form-label">Valor</label>
+              <input class="form-control" id="valorInput" type="number" name="valorInput" step="0.01" [(ngModel)]="gastoSelecionado.valor" required>
+              <div class="invalid-feedback">Campo obrigatório não preenchido</div>
+            </div>
+            <div class="mb-3">
+              <label for="tagsInput" class="form-label">Tags</label>
+              <select id="tagsInput" name="tagsInput" class="form-select" multiple size="3" [(ngModel)]="tagsSelecionadas">
+                <option *ngFor="let tag of tags" value="{{tag.nomeTag}}">{{tag.nomeTag}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" [disabled]="gastoForm.form.invalid" (click)="salvarGasto()">Salvar</button>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal editar despesa -->
+  <div class="modal fade" id="modalEditarDespesa" tabindex="-1" aria-labelledby="modalEditarDespesaLabel" aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form #atualizarGastoForm="ngForm" class="was-validated">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalEditarDespesaLabel">Editar despesa</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="nomeInput" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="atualizarNomeInput"  name="atualizarNomeInput" [(ngModel)]="gastoSelecionado.nomePessoa" required>
+              <div class="invalid-feedback">Campo obrigatório não preenchido</div>
+            </div>
+            <div class="mb-3">
+              <label for="descricaoInput" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="atualizarDescricaoInput" name="atualizarDescricaoInput" [(ngModel)]="gastoSelecionado.descricao" required>
+              <div class="invalid-feedback">Campo obrigatório não preenchido</div>
+            </div>
+            <div class="mb-3">
+              <label for="dataInput" class="form-label">Data</label>
+              <input class="form-control" id="atualizarDataInput" type="date" name="atualizarDataInput" [(ngModel)]="gastoSelecionado.data" required/>
+              <div class="invalid-feedback">Campo obrigatório não preenchido</div>
+            </div>
+            <div class="mb-3">
+              <label for="valorInput" class="form-label">Valor</label>
+              <input class="form-control" id="atualizarValorInput" type="number" name="atualizarValorInput" step="0.01" [(ngModel)]="gastoSelecionado.valor" required>
+              <div class="invalid-feedback">Campo obrigatório não preenchido</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="atualizarGastoForm.form.invalid" (click)="atualizarGasto()">Salvar</button>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal excluir despesa -->
+  <div class="modal fade" id="modalExcluirDespesa" tabindex="-1" aria-labelledby="modalExluirDespesaLabel" aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalExluirDespesaLabel">Excluir despesa</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Deseja excluir a despesa do dia {{gastoSelecionado.data | date:"dd/MM/yyyy" }} no valor de R$ {{gastoSelecionado.valor}}?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="confirmarExclusao()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal relatório -->
+  <div class="modal fade" id="modalRelatorio" tabindex="-1" aria-labelledby="modalDespesaLabel" aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form #relatorioForm="ngForm" class="was-validated">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalDespesaLabel">Gerar relatório de gastos</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="dataInicialInput" class="form-label">Data inicial</label>
+              <input class="form-control" id="dataInicialInput" name="dataInicialInput" type="date" [(ngModel)]="dataInicial" required/>
+              <div class="invalid-feedback">Campo inválido</div>
+            </div>
+            <div class="mb-3">
+              <label for="dataFinalInput" class="form-label">Data final</label>
+              <input class="form-control" id="dataFinalInput" name="dataFinalInput" type="date" [(ngModel)]="dataFinal" required/>
+              <div class="invalid-feedback">Campo inválido</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="gerarRelatorio()" [disabled]="relatorioForm.form.invalid">Gerar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

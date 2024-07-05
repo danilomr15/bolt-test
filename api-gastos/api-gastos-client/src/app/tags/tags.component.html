@@ -1,0 +1,81 @@
+<div class="tags-container">
+  
+  <div class="row">
+    <div class="col-2">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Novo</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Inserir nova tag</h6>
+                <p class="card-text">Cria um novo registro de uma nova tag para categorizar suas despesas</p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNovaTag">
+                  Novo
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <br>
+
+  <!-- Tabela de tags -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tag of tags">
+        <td>{{tag.nomeTag}}</td>
+        <td>
+            <button type="button" class="btn btn-danger btn-sm lista-margin" (click)="selecionarTag(tag)" data-bs-toggle="modal" data-bs-target="#modalExcluirTag">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal de nova tag -->
+  <div class="modal fade" id="modalNovaTag" tabindex="-1" aria-labelledby="modalTagLabel" aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form #novaTagForm="ngForm" class="was-validated">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalTagLabel">Nova tag</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="nomeTagInput" class="form-label">Nome da Tag</label>
+              <input class="form-control" id="nomeTagInput" name="nomeTagInput" type="text" [(ngModel)]="tagInput" required/>
+              <div class="invalid-feedback">Campo inválido</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="novaTagForm.form.invalid" (click)="adicionarTag()">Gerar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal excluir tag -->
+  <div class="modal fade" id="modalExcluirTag" tabindex="-1" aria-labelledby="modalExluirTagLabel" aria-hidden="true" data-bs-backdrop='static'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalExluirTagLabel">Excluir tag</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Deseja excluir a tag {{tagSelecionada.nomeTag}}?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="confirmarExclusao()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
