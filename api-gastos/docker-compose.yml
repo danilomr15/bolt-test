@@ -1,0 +1,38 @@
+version: '3.1'
+services:
+
+  app:
+    image: spring-boot-postgres
+    container_name: api-gastos
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/gastos_db
+      - SPRING_DATASOURCE_USERNAME=gastos_user
+      - SPRING_DATASOURCE_PASSWORD=pass123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+
+  db:
+    image: postgres
+    container_name: gastos-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=pass123
+      - POSTGRES_USER=gastos_user
+      - POSTGRES_DB=gastos_db
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  angular-app:
+    build: api-gastos-client/.
+    container_name: api-gastos-client
+    volumes:
+      - './api-gastos-client:/api-gastos-client'
+    ports:
+      - '4200:4200'
+    command: >
+      bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"

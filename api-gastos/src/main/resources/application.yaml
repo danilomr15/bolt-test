@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    database-platform:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/gastos_db
+    username: gastos_user
+    password: pass123

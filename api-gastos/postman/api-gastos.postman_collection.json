@@ -1,0 +1,705 @@
+{
+	"info": {
+		"_postman_id": "d336ef67-76ee-42ed-9539-5d9b525559a8",
+		"name": "api-gastos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9219554"
+	},
+	"item": [
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "Criar tag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomeTag\" : \"OUTROS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/tags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nomeTag\" : \"OUTROS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/tags",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"tags"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 19:51:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"nomeTag\": \"OUTROS\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Excluir tag",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/tags/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tags",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/tags/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"tags",
+										"7"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 19:52:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Listar tags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/tags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/tags",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"tags"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 19:52:15 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 3,\n        \"nomeTag\": \"AGUA\"\n    },\n    {\n        \"id\": 5,\n        \"nomeTag\": \"CONDOMINIO\"\n    },\n    {\n        \"id\": 2,\n        \"nomeTag\": \"INTERNET\"\n    },\n    {\n        \"id\": 4,\n        \"nomeTag\": \"LUZ\"\n    },\n    {\n        \"id\": 6,\n        \"nomeTag\": \"OUTROS\"\n    },\n    {\n        \"id\": 1,\n        \"nomeTag\": \"SUPERMERCADO\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Gastos",
+			"item": [
+				{
+					"name": "Criar gasto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomePessoa\" : \"Fulano de Tal\",\n    \"descricao\" : \"Compra no supermercado\",\n    \"data\" : \"2024-01-01\",\n    \"valor\" : 526.36,\n    \"tags\" : [\n        {\n            \"nomeTag\" : \"SUPERMERCADO\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gastos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gastos"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nomePessoa\" : \"Danilo\",\n    \"descricao\" : \"Conta de água\",\n    \"data\" : \"2024-07-04\",\n    \"valor\" : 150.0,\n    \"tags\" : [\n        {\n            \"nomeTag\" : \"AGUA\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/gastos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gastos"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 19:54:14 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"nomePessoa\": \"Danilo\",\n    \"descricao\": \"Conta de água\",\n    \"data\": \"2024-07-04\",\n    \"valor\": 150,\n    \"tags\": [\n        {\n            \"id\": 3,\n            \"nomeTag\": \"AGUA\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Atualizar gasto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomePessoa\": \"Danilo\",\n    \"descricao\": \"Conta de energia\",\n    \"data\": \"2024-07-04\",\n    \"valor\": 150,\n    \"tags\": [\n        {\n            \"id\": 3,\n            \"nomeTag\": \"LUZ\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gastos/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gastos",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "202",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nomePessoa\": \"Danilo\",\n    \"descricao\": \"Conta de energia\",\n    \"data\": \"2024-07-04\",\n    \"valor\": 150,\n    \"tags\": [\n        {\n            \"id\": 3,\n            \"nomeTag\": \"LUZ\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/gastos/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gastos",
+										"3"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 19:54:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"nomePessoa\": \"Danilo\",\n    \"descricao\": \"Conta de energia\",\n    \"data\": \"2024-07-04\",\n    \"valor\": 150,\n    \"tags\": [\n        {\n            \"id\": 4,\n            \"nomeTag\": \"LUZ\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Excluir gasto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gastos/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gastos",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "204",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/gastos/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gastos",
+										"4"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 19:58:39 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Buscar gasto por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gastos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gastos",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/gastos/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gastos",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 19:58:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"nomePessoa\": \"Danilo\",\n    \"descricao\": \"Compra no supermercado\",\n    \"data\": \"2024-07-04\",\n    \"valor\": 526.36,\n    \"tags\": [\n        {\n            \"id\": 1,\n            \"nomeTag\": \"SUPERMERCADO\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Relatório",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gastos/relatorio?dataInicial=2024-07-04&dataFinal=2024-07-04",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gastos",
+								"relatorio"
+							],
+							"query": [
+								{
+									"key": "dataInicial",
+									"value": "2024-07-04"
+								},
+								{
+									"key": "dataFinal",
+									"value": "2024-07-04"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/gastos/relatorio?dataInicial=2024-07-04&dataFinal=2024-07-04",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gastos",
+										"relatorio"
+									],
+									"query": [
+										{
+											"key": "dataInicial",
+											"value": "2024-07-04"
+										},
+										{
+											"key": "dataFinal",
+											"value": "2024-07-04"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 19:59:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"dataInicial\": \"2024-07-04\",\n    \"dataFinal\": \"2024-07-04\",\n    \"mediasDiarias\": [\n        {\n            \"data\": \"2024-07-04\",\n            \"gastos\": [\n                {\n                    \"id\": 1,\n                    \"nomePessoa\": \"Danilo\",\n                    \"descricao\": \"Compra no supermercado\",\n                    \"data\": \"2024-07-04\",\n                    \"valor\": 526.36,\n                    \"tags\": [\n                        {\n                            \"id\": 1,\n                            \"nomeTag\": \"SUPERMERCADO\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 2,\n                    \"nomePessoa\": \"Danilo\",\n                    \"descricao\": \"Compra no supermercado\",\n                    \"data\": \"2024-07-04\",\n                    \"valor\": 215.66,\n                    \"tags\": [\n                        {\n                            \"id\": 4,\n                            \"nomeTag\": \"LUZ\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 3,\n                    \"nomePessoa\": \"Danilo\",\n                    \"descricao\": \"Conta de energia\",\n                    \"data\": \"2024-07-04\",\n                    \"valor\": 150,\n                    \"tags\": [\n                        {\n                            \"id\": 4,\n                            \"nomeTag\": \"LUZ\"\n                        }\n                    ]\n                }\n            ],\n            \"mediaDiaria\": 297.34\n        }\n    ],\n    \"dataMaiorGasto\": \"2024-07-04\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Listar gastos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gastos/listar?pagina=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gastos",
+								"listar"
+							],
+							"query": [
+								{
+									"key": "pagina",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/gastos/listar?pagina=0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"gastos",
+										"listar"
+									],
+									"query": [
+										{
+											"key": "pagina",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Jul 2024 20:00:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalPages\": 1,\n    \"totalElements\": 3,\n    \"pageable\": {\n        \"pageNumber\": 0,\n        \"pageSize\": 10,\n        \"sort\": {\n            \"sorted\": true,\n            \"empty\": false,\n            \"unsorted\": false\n        },\n        \"offset\": 0,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"size\": 10,\n    \"content\": [\n        {\n            \"id\": 1,\n            \"nomePessoa\": \"Danilo\",\n            \"descricao\": \"Compra no supermercado\",\n            \"data\": \"2024-07-04\",\n            \"valor\": 526.36,\n            \"tags\": [\n                {\n                    \"id\": 1,\n                    \"nomeTag\": \"SUPERMERCADO\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"nomePessoa\": \"Danilo\",\n            \"descricao\": \"Compra no supermercado\",\n            \"data\": \"2024-07-04\",\n            \"valor\": 215.66,\n            \"tags\": [\n                {\n                    \"id\": 4,\n                    \"nomeTag\": \"LUZ\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"nomePessoa\": \"Danilo\",\n            \"descricao\": \"Conta de energia\",\n            \"data\": \"2024-07-04\",\n            \"valor\": 150,\n            \"tags\": [\n                {\n                    \"id\": 4,\n                    \"nomeTag\": \"LUZ\"\n                }\n            ]\n        }\n    ],\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": true,\n        \"empty\": false,\n        \"unsorted\": false\n    },\n    \"first\": true,\n    \"last\": true,\n    \"numberOfElements\": 3,\n    \"empty\": false\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
